@@ -184,6 +184,7 @@ ul {
   font-size: 14px;
 
   &:hover {
+    cursor: pointer;
     opacity: 50%;
   }
 }
