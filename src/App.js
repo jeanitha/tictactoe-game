@@ -110,7 +110,7 @@ export default function Board() {
       </div>
       <div className="txt-container">
         <p className="explanation">This game is created using React.js.</p>
-        <p className="explanation-1">To see more of my projects,</p>
+        <p className="explanation-1">To see the source code or see more of my projects,</p>
         <a href="https://portfolio-website-jeanithas-projects.vercel.app/">visit my website here</a>
       </div>
       <div className="btn-container">
@@ -202,8 +202,25 @@ function getBotMove(squares) {
     return 4;
   }
 
-  // Corner Move
+  // Check if used has filled one of the corners
   const corners = [0, 2, 6, 8];
+  const userCorners = corners.filter((corner) => squares[corner] === "X");
+  if (userCorners.length > 0) {
+    const corner = userCorners[0];
+    const adjacentSquares = {
+      0 : [1, 3],
+      2 : [1, 5],
+      6 : [3, 7],
+      8 : [5, 7],
+    };
+    const emptyAdjacentSquares = adjacentSquares[corner].filter((square) => squares[square] === null);
+
+    if (emptyAdjacentSquares.length > 0) {
+      return emptyAdjacentSquares[0];
+    }
+  }
+
+  // Corner Move
   const emptyCorners = corners.filter((corner) => squares[corner] === null);
   if (emptyCorners.length > 0) {
     return emptyCorners[Math.floor(Math.random() * emptyCorners.length)];
